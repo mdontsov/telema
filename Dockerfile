@@ -1,20 +1,14 @@
-# Use an official OpenJDK image as a parent image
-FROM openjdk:17-jdk-slim
+# Use an official JDK as the base image
+FROM eclipse-temurin:17-jdk
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the build.gradle and settings.gradle to the container
-COPY build.gradle settings.gradle /app/
+# Copy the build jar from the build context to the container
+COPY build/libs/telema.jar /app/telema.jar
 
-# Copy the entire project to the container
-COPY . /app/
-
-# Build the project
-RUN ./gradlew build --no-daemon
-
-# Expose the application port
+# Expose the port the application will run on (for instance 1 or 2)
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "/app/build/libs/telema.jar"]
+ENTRYPOINT ["java", "-jar", "telema.jar"]

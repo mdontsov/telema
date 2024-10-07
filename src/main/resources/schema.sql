@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS file_entity (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    file_name VARCHAR(255) NOT NULL,
+    file_type VARCHAR(255) NOT NULL,
+    uploaded_by VARCHAR(255) NOT NULL,
+    uploaded_at TIMESTAMP NOT NULL
+);
