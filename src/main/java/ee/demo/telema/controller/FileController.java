@@ -28,8 +28,9 @@ public class FileController {
           .body(null);
     }
 
-    FileEntity savedFile = fileService.uploadFile(fileEntity);
+    var savedFile = fileService.uploadFile(fileEntity);
     List<FileEntity> files = fileService.getFilesByUser(fileEntity.getUploadedBy());
+    files.add(savedFile);
     return ResponseEntity.ok(files);
   }
 

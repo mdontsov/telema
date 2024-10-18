@@ -14,14 +14,16 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
   @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.csrf(AbstractHttpConfigurer::disable)
+  public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
+    security.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth.requestMatchers("/ping")
             .permitAll()
+            .requestMatchers("/api/files/**")
+            .hasRole("ADMIN")
             .anyRequest()
             .authenticated())
         .sessionManagement(session -> session.sessionCreationPolicy(STATELESS));
 
-    return http.build();
+    return security.build();
   }
 }

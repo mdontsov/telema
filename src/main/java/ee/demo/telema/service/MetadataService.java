@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class MetadataService {
 
   public String fetchMetadata(String fileName) {
-    String url = "https://api.github.com";
+    var url = "https://api.github.com";
     return restTemplate().getForObject(url, String.class);
   }
 }
